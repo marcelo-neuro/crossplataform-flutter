@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_menu/menu_item.dart';
 
 class PizzaMenu extends StatelessWidget {
   const PizzaMenu({super.key});
@@ -7,15 +8,12 @@ class PizzaMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Pizza Menu')),
-      body: const Column(
+      body: Column(
         children: [
-          Card(
-            child: Row(
-              children: [
-                Image.asset(),
-              ],
-            ),
-          )
+          MenuItem(),
+          MenuItem(),
+          MenuItem(),
+          MenuItem(),
         ],
       ),
     );
