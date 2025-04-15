@@ -1,14 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:pizza_menu/pizza_data.dart';
 
 class MenuItem extends StatelessWidget {
-  const MenuItem({super.key, required this.imagem, required this.titulo, required this.desc, required this.preco});
+  const MenuItem({super.key, required this.pizza});
 
-  final String imagem;
-  final String titulo;
-  final String desc;
-  final String preco;
-
-
+  final Pizza pizza;
 
   @override
   Widget build(BuildContext context) {
@@ -17,27 +15,33 @@ class MenuItem extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Image.asset(
-                    imagem,
-                    width: 100,
-                    height: 100,
+                  ColorFiltered(
+                    colorFilter: pizza.soldOut ? 
+                      const ColorFilter.mode(Colors.grey, BlendMode.saturation) : 
+                      const ColorFilter.mode(Colors.transparent, BlendMode.multiply),
+                    child: Image.asset(
+                      pizza.photoPath,
+                      width: 100,
+                      height: 100,
+                    ),
                   ),
                   const SizedBox(width: 20),
-                  const Expanded(
+                  Expanded(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Focaccia',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                        SizedBox(height: 6,),
+                        Text(pizza.name,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                        const SizedBox(height: 6,),
                         Text(
-                          'Bread with italian olive oil and rosemary.',
-                          style: TextStyle(fontSize: 16, color: Colors.black87),
+                          pizza.ingredients,
+                          style: const TextStyle(fontSize: 16, color: Colors.black87),
                         ),
-                        SizedBox(height: 6,),
+                        const SizedBox(height: 6,),
                         Text(
-                          '\$12',
-                          style: TextStyle(color: Colors.black45),
+                          pizza.soldOut ? "Sold out" : "\$${pizza.price}",
+                          style: const TextStyle(color: Colors.black45),
                         ),
                       ],
                     ),
